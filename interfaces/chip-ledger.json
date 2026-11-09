@@ -1,0 +1,204 @@
+{
+  "id": "chip-ledger",
+  "type": "ae/chip-ledger",
+  "version": "1.0.0",
+  "operations": {
+    "create": {
+      "arguments": [
+        "settings?:Partial<LedgerSettings>"
+      ],
+      "returns": "Ledger (empty: nobody in it, nothing issued; same as openLedger([], settings))"
+    },
+    "issue": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string",
+        "amount:number"
+      ],
+      "returns": "Ledger (new chips: a first issue adds the player with seat = order added; later ones add to the stack; always counted as issued; amount 0 or more)"
+    },
+    "balance": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string"
+      ],
+      "returns": "number (chips held behind, not counting wagers; 0 for an unknown player)"
+    },
+    "issued": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "number (all chips ever issued)"
+    },
+    "setSeats": {
+      "arguments": [
+        "ledger:Ledger",
+        "seats:{id,seat}[]"
+      ],
+      "returns": "Ledger (where players sit, for the odd chip rule; throws for an unknown player, a bad seat or two on one seat)"
+    },
+    "setStacks": {
+      "arguments": [
+        "ledger:Ledger",
+        "stacks:Record<id,number>"
+      ],
+      "returns": "Ledger (each listed player's stack becomes the given number and their wagers clear; throws unless the listed players hold the same chips in total before and after)"
+    },
+    "createLedgerApi": {
+      "arguments": [
+        "settings?:Partial<LedgerSettings>"
+      ],
+      "returns": "{settings,create(),issue,balance,issued,setSeats} (the tournament's operations with the settings bound)"
+    },
+    "openLedger": {
+      "arguments": [
+        "entries:{id:string,seat:number}[]",
+        "settings?:{startingStack,minimumUnit,oddChipRule,sidePots,seats?}"
+      ],
+      "returns": "Ledger {settings,stakes:Stake[],issued}"
+    },
+    "validateSettings": {
+      "arguments": [
+        "settings?:Partial<LedgerSettings>"
+      ],
+      "returns": "LedgerSettings (defaults filled; throws RangeError)"
+    },
+    "stakeOf": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string"
+      ],
+      "returns": "Stake {id,seat,stack,bet,totalIn,folded}"
+    },
+    "isAllIn": {
+      "arguments": [
+        "stake:Stake"
+      ],
+      "returns": "boolean"
+    },
+    "commit": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string",
+        "amount:number"
+      ],
+      "returns": "{ledger,committed:number} (capped at the stack)"
+    },
+    "commitTo": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string",
+        "to:number"
+      ],
+      "returns": "{ledger,committed:number}"
+    },
+    "fold": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string"
+      ],
+      "returns": "Ledger"
+    },
+    "endRound": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "Ledger (round bets back to 0)"
+    },
+    "uncalledExcess": {
+      "arguments": [
+        "stakes:Stake[]"
+      ],
+      "returns": "{id,amount}|null"
+    },
+    "returnUncalled": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "{ledger,returned:{id,amount}|null}"
+    },
+    "buildPots": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "Pot[] {amount,eligible:string[]} (one per contribution level, or one pot when sidePots is off)"
+    },
+    "displayPots": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "Pot[] (pots as shown mid-round, without this round's bets)"
+    },
+    "splitAmount": {
+      "arguments": [
+        "amount:number",
+        "winnerIds:string[]",
+        "unit?:number"
+      ],
+      "returns": "{id,amount}[] (odd chips to the first winners in order)"
+    },
+    "awardPot": {
+      "arguments": [
+        "ledger:Ledger",
+        "pot:Pot",
+        "winners:string[]",
+        "button:number"
+      ],
+      "returns": "Award {amount,eligible,winners:{id,amount}[]} (odd chips by oddChipRule)"
+    },
+    "settle": {
+      "arguments": [
+        "ledger:Ledger",
+        "awards:Award[]"
+      ],
+      "returns": "Ledger (stacks paid, wagers cleared; throws unless every wagered chip is paid)"
+    },
+    "voidHand": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "Ledger (wagers returned)"
+    },
+    "nextHand": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "Ledger (folded marks cleared)"
+    },
+    "credit": {
+      "arguments": [
+        "ledger:Ledger",
+        "id:string",
+        "amount:number"
+      ],
+      "returns": "Ledger (chips from outside, counted as issued)"
+    },
+    "audit": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "{inPlay,issued,balanced:boolean}"
+    },
+    "clockwise": {
+      "arguments": [
+        "seat:number",
+        "button:number",
+        "seats?:number"
+      ],
+      "returns": "number (1 = seat after the button, button itself last)"
+    },
+    "exportLedger": {
+      "arguments": [
+        "ledger:Ledger"
+      ],
+      "returns": "string (ndjson, one record per line with sha256)"
+    },
+    "importLedger": {
+      "arguments": [
+        "text:string"
+      ],
+      "returns": "Ledger (throws on a checksum mismatch or malformed record)"
+    }
+  },
+  "notes": "Two ways to start a ledger. Book: create(settings) then issue(ledger, id, amount) per player and per rebuy, one ledger for a whole game across hands (tournament); balance and issued read it. Table: openLedger(entries, settings) with everyone at once, each given startingStack. The `startingStack` setting is used only by openLedger; with issue the caller says every amount. A game that keeps its own stacks (hold'em rules) writes them back with setStacks, or plays through commit and settle."
+}

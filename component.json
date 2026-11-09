@@ -1,0 +1,220 @@
+{
+  "format": 1,
+  "kind": "component",
+  "identity": {
+    "name": "ourapps-ae/chip-ledger",
+    "version": "0.4.0",
+    "sourceRevision": "19905b75dbea89fbfd424d67fe26c81aaed0e018",
+    "sourceTreeDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "licenceStatus": "deferred"
+  },
+  "facilities": [
+    {
+      "id": "chip-ledger",
+      "description": "Stacks, bets, pots, side pots, odd chips and a chip balance audit"
+    }
+  ],
+  "documents": {
+    "contract": "CONTRACT.md",
+    "interfaces": [
+      "interfaces/chip-ledger.json",
+      "interfaces/ledger.schema.json",
+      "suitability.json",
+      "migration.json"
+    ],
+    "examples": [
+      "examples/consumer.ts"
+    ],
+    "licenceNotice": "LICENCE"
+  },
+  "collect": [
+    {
+      "id": "startingStack",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 5000
+    },
+    {
+      "id": "minimumUnit",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 1
+    },
+    {
+      "id": "oddChipRule",
+      "type": "string",
+      "grammar": "slug",
+      "required": false,
+      "secret": false,
+      "default": "clockwise-after-button"
+    },
+    {
+      "id": "sidePots",
+      "type": "boolean",
+      "grammar": "boolean",
+      "required": false,
+      "secret": false,
+      "default": true
+    },
+    {
+      "id": "seats",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 9
+    }
+  ],
+  "files": [
+    {
+      "path": "CONTRACT.md",
+      "executable": false
+    },
+    {
+      "path": "INSTRUCTIONS.md",
+      "executable": false
+    },
+    {
+      "path": "LICENCE",
+      "executable": false
+    },
+    {
+      "path": "SOURCE.md",
+      "executable": false
+    },
+    {
+      "path": "examples/consumer.ts",
+      "executable": false
+    },
+    {
+      "path": "implementation/server/ledger.ts",
+      "executable": false
+    },
+    {
+      "path": "interfaces/chip-ledger.json",
+      "executable": false
+    },
+    {
+      "path": "interfaces/ledger.schema.json",
+      "executable": false
+    },
+    {
+      "path": "migration.json",
+      "executable": false
+    },
+    {
+      "path": "suitability.json",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/pots.json",
+      "executable": false
+    },
+    {
+      "path": "tests/web.test.ts",
+      "executable": false
+    },
+    {
+      "path": "tools.lock.json",
+      "executable": false
+    },
+    {
+      "path": "visual/definition.json",
+      "executable": false
+    },
+    {
+      "path": "visual/examples/connected.json",
+      "executable": false
+    },
+    {
+      "path": "visual/output/connected.png",
+      "executable": false
+    },
+    {
+      "path": "visual/output/connected.svg",
+      "executable": false
+    },
+    {
+      "path": "visual/output/description.md",
+      "executable": false
+    }
+  ],
+  "artefacts": [
+    {
+      "source": "implementation/server/ledger.ts",
+      "destination": "components/chip-ledger/server/ledger.ts",
+      "template": false,
+      "executable": false
+    }
+  ],
+  "dependencies": [],
+  "provides": [
+    {
+      "id": "chip-ledger",
+      "type": "ae/chip-ledger",
+      "version": "1.0.0",
+      "path": "interfaces/chip-ledger.json"
+    }
+  ],
+  "requires": [],
+  "visual": {
+    "definition": "visual/definition.json",
+    "examples": [
+      "visual/examples/connected.json"
+    ],
+    "outputs": [
+      "visual/output/connected.svg",
+      "visual/output/connected.png"
+    ],
+    "descriptions": [
+      "visual/output/description.md"
+    ]
+  },
+  "capabilities": {
+    "hosts": [],
+    "secrets": [],
+    "writes": [
+      "components/chip-ledger/server/ledger.ts"
+    ]
+  },
+  "infrastructure": {
+    "accounts": [],
+    "costStatus": "unmeasured",
+    "deployedReason": "No deployed service; injected resources and local library functions only."
+  },
+  "verification": [
+    {
+      "id": "web",
+      "root": "package",
+      "argv": [
+        "node",
+        "--test",
+        "tests/web.test.ts"
+      ],
+      "cwd": ".",
+      "prepare": [],
+      "tools": {
+        "node": "26.5.0"
+      },
+      "fixtures": [
+        "tests/fixtures/pots.json"
+      ],
+      "locks": [
+        "tools.lock.json"
+      ],
+      "network": false,
+      "timeoutSeconds": 120,
+      "expectedExit": 0,
+      "scope": "required-local",
+      "requirements": []
+    }
+  ],
+  "upgrade": {
+    "policy": "patch",
+    "migration": "files-only"
+  }
+}

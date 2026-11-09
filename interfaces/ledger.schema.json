@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ae/chip-ledger ndjson records",
+  "description": "Each line of an export is {kind, record, sha256}. The first line has kind 'ledger'; the rest have kind 'stake'. sha256 is the hex SHA-256 of JSON.stringify(record).",
+  "type": "object",
+  "required": [
+    "kind",
+    "record",
+    "sha256"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "ledger",
+        "stake"
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "record": {
+      "oneOf": [
+        {
+          "title": "ledger",
+          "type": "object",
+          "required": [
+            "settings",
+            "issued"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "issued": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "settings": {
+              "type": "object",
+              "required": [
+                "startingStack",
+                "minimumUnit",
+                "oddChipRule",
+                "sidePots",
+                "seats"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "startingStack": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minimumUnit": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "oddChipRule": {
+                  "enum": [
+                    "clockwise-after-button",
+                    "first-listed"
+                  ]
+                },
+                "sidePots": {
+                  "type": "boolean"
+                },
+                "seats": {
+                  "type": "integer",
+                  "minimum": 2
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "stake",
+          "type": "object",
+          "required": [
+            "id",
+            "seat",
+            "stack",
+            "bet",
+            "totalIn",
+            "folded"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "seat": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stack": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bet": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "totalIn": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "folded": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

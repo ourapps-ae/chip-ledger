@@ -1,0 +1,55 @@
+{
+  "description": "Contribution layers and the pots built from them. Each case: stakes {id, seat, totalIn, folded}, expected excess {id, amount}|null and pots after the excess is returned.",
+  "cases": [
+    {
+      "name": "short all-in with a folded blind",
+      "stakes": [
+        {"id": "A", "seat": 0, "totalIn": 100, "folded": false},
+        {"id": "B", "seat": 1, "totalIn": 300, "folded": false},
+        {"id": "C", "seat": 2, "totalIn": 300, "folded": false},
+        {"id": "D", "seat": 3, "totalIn": 50, "folded": true}
+      ],
+      "excess": null,
+      "pots": [{"amount": 350, "eligible": ["A", "B", "C"]}, {"amount": 400, "eligible": ["B", "C"]}]
+    },
+    {
+      "name": "uncalled raise goes back",
+      "stakes": [
+        {"id": "A", "seat": 0, "totalIn": 500, "folded": false},
+        {"id": "B", "seat": 1, "totalIn": 200, "folded": false}
+      ],
+      "excess": {"id": "A", "amount": 300},
+      "pots": [{"amount": 400, "eligible": ["A", "B"]}]
+    },
+    {
+      "name": "everyone else folded",
+      "stakes": [
+        {"id": "A", "seat": 0, "totalIn": 50, "folded": false},
+        {"id": "B", "seat": 1, "totalIn": 25, "folded": true},
+        {"id": "C", "seat": 2, "totalIn": 0, "folded": true}
+      ],
+      "excess": {"id": "A", "amount": 25},
+      "pots": [{"amount": 50, "eligible": ["A"]}]
+    },
+    {
+      "name": "three all-ins at different sizes",
+      "stakes": [
+        {"id": "A", "seat": 0, "totalIn": 100, "folded": false},
+        {"id": "B", "seat": 1, "totalIn": 200, "folded": false},
+        {"id": "C", "seat": 2, "totalIn": 400, "folded": false},
+        {"id": "D", "seat": 3, "totalIn": 400, "folded": false}
+      ],
+      "excess": null,
+      "pots": [{"amount": 400, "eligible": ["A", "B", "C", "D"]}, {"amount": 300, "eligible": ["B", "C", "D"]}, {"amount": 400, "eligible": ["C", "D"]}]
+    },
+    {
+      "name": "nobody has put anything in",
+      "stakes": [
+        {"id": "A", "seat": 0, "totalIn": 0, "folded": false},
+        {"id": "B", "seat": 1, "totalIn": 0, "folded": false}
+      ],
+      "excess": null,
+      "pots": []
+    }
+  ]
+}

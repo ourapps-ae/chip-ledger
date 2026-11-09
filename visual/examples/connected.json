@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "chip-ledger-connected",
+  "title": "Chip ledger: connected consumer",
+  "status": "example",
+  "view": "component",
+  "focus": "component",
+  "definitions": [
+    {
+      "id": "ourapps-ae.chip-ledger",
+      "name": "Chip ledger",
+      "kind": "component",
+      "status": "example",
+      "package": "ourapps-ae/chip-ledger",
+      "version": "0.4.0",
+      "ports": [
+        {
+          "id": "chip-ledger",
+          "name": "Chip ledger",
+          "direction": "output",
+          "kind": "interface",
+          "type": "ae/chip-ledger",
+          "version": "1.0.0"
+        }
+      ],
+      "settings": [
+        {
+          "id": "startingStack",
+          "name": "Startingstack",
+          "type": "number",
+          "required": false,
+          "secret": false,
+          "default": 5000
+        },
+        {
+          "id": "minimumUnit",
+          "name": "Minimumunit",
+          "type": "number",
+          "required": false,
+          "secret": false,
+          "default": 1
+        },
+        {
+          "id": "oddChipRule",
+          "name": "Oddchiprule",
+          "type": "string",
+          "required": false,
+          "secret": false,
+          "default": "clockwise-after-button"
+        },
+        {
+          "id": "sidePots",
+          "name": "Sidepots",
+          "type": "boolean",
+          "required": false,
+          "secret": false,
+          "default": true
+        },
+        {
+          "id": "seats",
+          "name": "Seats",
+          "type": "number",
+          "required": false,
+          "secret": false,
+          "default": 9
+        }
+      ]
+    },
+    {
+      "id": "consumer",
+      "name": "Example application consumer",
+      "kind": "application",
+      "status": "example",
+      "revision": "0.1.0",
+      "ports": [
+        {
+          "id": "chip-ledger",
+          "name": "Chip ledger",
+          "direction": "input",
+          "kind": "interface",
+          "type": "ae/chip-ledger",
+          "version": "1.0.0",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "settings": []
+    }
+  ],
+  "instances": [
+    {
+      "id": "component",
+      "name": "Chip ledger",
+      "definition": "ourapps-ae.chip-ledger",
+      "configuration": {}
+    },
+    {
+      "id": "consumer",
+      "name": "Example consumer",
+      "definition": "consumer",
+      "configuration": {}
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instance": "component",
+        "port": "chip-ledger"
+      },
+      "target": {
+        "instance": "consumer",
+        "port": "chip-ledger"
+      }
+    }
+  ]
+}

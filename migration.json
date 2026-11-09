@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "stores": [
+    {
+      "id": "ledger",
+      "schema": {
+        "name": "ae/chip-ledger-records",
+        "version": "1.0.0",
+        "file": "interfaces/ledger.schema.json"
+      }
+    }
+  ],
+  "export": [
+    {
+      "format": "ndjson",
+      "portable": true,
+      "operation": "exportLedger",
+      "description": "One line per record: the ledger settings and issued total first, then one line per player stake. Each line carries the SHA-256 of its record."
+    }
+  ],
+  "import": [
+    {
+      "format": "ndjson",
+      "portable": true,
+      "operation": "importLedger"
+    }
+  ],
+  "steps": [],
+  "verification": {
+    "counts": true,
+    "checksums": "sha256 per record",
+    "sampleReadBack": 20,
+    "endToEnd": "tests/web.test.ts"
+  },
+  "limits": {
+    "maxMegabytes": 1,
+    "requiresStop": false,
+    "cannotPreserve": [
+      "chips of a hand in progress are exported as wagers (bet and totalIn), not as pots"
+    ]
+  },
+  "retention": {
+    "afterRemovalDays": 30
+  }
+}

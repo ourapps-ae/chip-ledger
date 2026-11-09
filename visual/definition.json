@@ -1,0 +1,60 @@
+{
+  "id": "ourapps-ae.chip-ledger",
+  "name": "Chip ledger",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/chip-ledger",
+  "version": "0.4.0",
+  "ports": [
+    {
+      "id": "chip-ledger",
+      "name": "Chip ledger",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/chip-ledger",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": [
+    {
+      "id": "startingStack",
+      "name": "Startingstack",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 5000
+    },
+    {
+      "id": "minimumUnit",
+      "name": "Minimumunit",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 1
+    },
+    {
+      "id": "oddChipRule",
+      "name": "Oddchiprule",
+      "type": "string",
+      "required": false,
+      "secret": false,
+      "default": "clockwise-after-button"
+    },
+    {
+      "id": "sidePots",
+      "name": "Sidepots",
+      "type": "boolean",
+      "required": false,
+      "secret": false,
+      "default": true
+    },
+    {
+      "id": "seats",
+      "name": "Seats",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 9
+    }
+  ]
+}
