@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ae/chip-ledger ndjson records",
+  "title": "ae/chip-ledger-records",
+  "x-version": "1.0.0",
   "description": "Each line of an export is {kind, record, sha256}. The first line has kind 'ledger'; the rest have kind 'stake'. sha256 is the hex SHA-256 of JSON.stringify(record).",
   "type": "object",
   "required": [

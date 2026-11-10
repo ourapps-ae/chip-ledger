@@ -20,10 +20,11 @@ The installer collects five settings. `startingStack` is the chips each player b
 - `implementation/server/ledger.ts` -> `components/chip-ledger/server/ledger.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence wording remains deferred.
+`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
-- `interfaces/chip-ledger.json` defines `chip-ledger` (ae/chip-ledger) version 1.0.0.
+- `interfaces/chip-ledger.json` defines `chip-ledger` (ae/chip-ledger) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
+- `interfaces/ledger.schema.json` (ae/chip-ledger-records 1.0.0) is a JSON Schema 2020-12 document of one line of the ndjson export.
 
 ## Required interfaces
 None.
