@@ -20,7 +20,7 @@ The installer collects five settings. `startingStack` is the chips each player b
 - `implementation/server/ledger.ts` -> `components/chip-ledger/server/ledger.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
+`tools.lock.json` pins verification tools: node 26.5. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
 - `interfaces/chip-ledger.json` defines `chip-ledger` (ae/chip-ledger) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
@@ -41,7 +41,7 @@ No deployed service and no accounts. The ledger is plain data the host stores wh
 ## Verification
 `tests/web.test.ts` checks settings validation, commit limits and the minimum unit, the pot layers and uncalled-excess cases in `tests/fixtures/pots.json`, the single-pot mode, the odd-chip rule both ways, a loop proving `splitAmount` never loses a chip for many amounts, winner counts and units, settle and void balancing, credit and audit, and the ndjson round trip with a tampered line rejected. It also checks the book (create, issue, balance, issued, a rebuy, three hands on one ledger with the audit balanced after each, bound settings, seats and the odd chip by seat, `setStacks` conserving chips, and export and import of an issued ledger). It checks the `seats` setting: default 9, validation, the odd chip going to a different winner on a 6-seat table than on a 9-seat one, the setting carried through export and import, and an export without `seats` refused.
 
-- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5.0)
+- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5)
 
 ## Scenarios and presentation
 A hold'em tournament table with a 5000 chip stack and side pots. A cash game with a 25 chip minimum unit. A house game with a single pot (side pots off). A table moved between hosts by export and import.

@@ -19,5 +19,5 @@ Keep the `Ledger` in the game state and replace it with each function's result. 
 ## How to check
 From the component directory:
 
-- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5.0)
-- `python3.12 -B /Users/george/Projects/com/my/tools/check_component.py components/chip-ledger` validates the manifest, sidecars and runs the required-local suite.
+- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5)
+- `python3 -m aepm review <digest> --store STORE --policy POLICY --trusted --allow-network` checks an archive fetched with `python3 -m aepm fetch ourapps-ae/chip-ledger@VERSION --store STORE --from https://ourapps.app` and runs its suites.
