@@ -293,12 +293,13 @@ export function exportLedger(ledger: Ledger): string {
 
 export function importLedger(text: string): Ledger {
   const lines = text.split("\n").filter((l) => l.trim() !== "");
-  let header: { settings: Required<LedgerSettings>; issued: number } | null = null;
+  type Header = { settings: Required<LedgerSettings>; issued: number };
+  let header: Header | null = null;
   const stakes: Stake[] = [];
   for (const [index, line] of lines.entries()) {
     const row = JSON.parse(line) as { kind: string; record: unknown; sha256: string };
     if (digest(row.record) !== row.sha256) throw new Error(`line ${index + 1}: checksum does not match`);
-    if (row.kind === "ledger" && index === 0) header = row.record as typeof header;
+    if (row.kind === "ledger" && index === 0) header = row.record as Header;
     else if (row.kind === "stake" && header) stakes.push(row.record as Stake);
     else throw new Error(`line ${index + 1}: unexpected record ${row.kind}`);
   }
