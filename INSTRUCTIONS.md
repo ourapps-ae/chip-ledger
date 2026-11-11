@@ -3,7 +3,7 @@
 ## For the agent
 Select this component for any game with chips. Set `startingStack`, `minimumUnit`, `oddChipRule`, `sidePots` and `seats` (the number of seats at the table; default 9; the recipe sets it from its players answer) from the recipe's chip answers (hold'em house rules: 5000, 1, clockwise-after-button, true). Connect the provided `chip-ledger` to the rules component and to the tournament component.
 
-- Select package `ourapps-ae/chip-ledger` version `0.5.0`.
+- Select package `ourapps-ae/chip-ledger` version `0.5.1`.
 - Settings to configure:
   - `startingStack` (integer; optional; default `5000`)
   - `minimumUnit` (integer; optional; default `1`)

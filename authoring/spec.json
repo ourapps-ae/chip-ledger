@@ -1,6 +1,6 @@
 {
   "name": "chip-ledger",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "title": "Chip ledger",
   "description": "Whole-number chip accounting for games with stacks and bets: commits, uncalled excess, pots and side pots, odd-chip rule, settlement, and a balance audit.",
   "facilities": [
