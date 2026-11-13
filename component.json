@@ -1,6 +1,12 @@
 {
   "artefacts": [
     {
+      "destination": "components/chip-ledger/server/index.ts",
+      "executable": false,
+      "source": "implementation/server/index.ts",
+      "template": false
+    },
+    {
       "destination": "components/chip-ledger/server/ledger.ts",
       "executable": false,
       "source": "implementation/server/ledger.ts",
@@ -11,6 +17,7 @@
     "hosts": [],
     "secrets": [],
     "writes": [
+      "components/chip-ledger/server/index.ts",
       "components/chip-ledger/server/ledger.ts"
     ]
   },
@@ -100,6 +107,10 @@
     {
       "executable": false,
       "path": "examples/consumer.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/server/index.ts"
     },
     {
       "executable": false,

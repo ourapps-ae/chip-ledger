@@ -112,5 +112,6 @@
         }
       ]
     }
-  }
+  },
+  "x-ourapps-modules": {}
 }
