@@ -1,6 +1,6 @@
 {
   "name": "chip-ledger",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "title": "Chip ledger",
   "description": "Whole-number chip accounting for games with stacks and bets: commits, uncalled excess, pots and side pots, odd-chip rule, settlement, and a balance audit.",
   "facilities": [
@@ -224,5 +224,33 @@
   "templates": [],
   "modules": {
     "server": "server/index.ts"
+  },
+  "toolchains": {
+    "server": [
+      {
+        "name": "node",
+        "versionRange": ">=26.5.0 <27.0.0",
+        "probe": [
+          "node",
+          "--version"
+        ],
+        "install": {
+          "macos": [
+            "brew",
+            "install",
+            "node"
+          ],
+          "windows": [
+            "winget",
+            "install",
+            "--exact",
+            "--id",
+            "OpenJS.NodeJS"
+          ],
+          "linux": null
+        },
+        "manual": "Without the package manager, install Node 26 from nodejs.org (the installer, or the zip or tar archive with its folder put first on PATH); on Linux also from the NodeSource repository."
+      }
+    ]
   }
 }
