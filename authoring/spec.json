@@ -1,6 +1,6 @@
 {
   "name": "chip-ledger",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "title": "Chip ledger",
   "description": "Whole-number chip accounting for games with stacks and bets: commits, uncalled excess, pots and side pots, odd-chip rule, settlement, and a balance audit.",
   "facilities": [
@@ -106,5 +106,123 @@
       }
     ],
     "notes": "Pure library; no provider limits apply. Ledger data is small: a nine-player table exports as ten short lines."
+  },
+  "classes": [
+    {
+      "reference": {
+        "name": "ourapps-ae/chip-ledger-class",
+        "version": "1.0.0",
+        "digest": "8d80db98857ee07f1275a4e0b75af4fe3c225af77273662c5e28136dbfbd7efb"
+      },
+      "descriptor": {
+        "format": 1,
+        "name": "ourapps-ae/chip-ledger-class",
+        "version": "1.0.0",
+        "provides": [
+          {
+            "type": "ae/chip-ledger",
+            "version": "1.0.0",
+            "path": "classes/chip-ledger-class/chip-ledger.json",
+            "modules": {
+              "server": [
+                "server/index.ts"
+              ]
+            }
+          }
+        ],
+        "requires": [],
+        "settings": {
+          "type": "object",
+          "properties": {
+            "seats": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "seats"
+          ],
+          "additionalProperties": false
+        },
+        "inventory": [
+          {
+            "path": "classes/chip-ledger-class/check.mjs",
+            "digest": "41fc928d962500d759f0e9b937eb932369c81c276f94b0424506572a29c257d3"
+          },
+          {
+            "path": "classes/chip-ledger-class/chip-ledger.json",
+            "digest": "2a9fb27145d5372117bc6a95d7e64fd426abf83fb2d025ff459c51378dad1ded"
+          },
+          {
+            "path": "classes/chip-ledger-class/runtime.mjs",
+            "digest": "7440f3891614c423f74668cb5a2445fea58bbfa4d7c740c8e8a855d1d9300d43"
+          }
+        ],
+        "verification": [
+          {
+            "id": "shared",
+            "root": "package",
+            "argv": [
+              "node",
+              "classes/chip-ledger-class/check.mjs"
+            ],
+            "cwd": ".",
+            "prepare": [],
+            "tools": {
+              "node": "26.5"
+            },
+            "fixtures": [
+              "classes/chip-ledger-class/check.mjs"
+            ],
+            "locks": [],
+            "network": false,
+            "timeoutSeconds": 60,
+            "expectedExit": 0,
+            "scope": "required-local",
+            "requirements": []
+          }
+        ]
+      }
+    }
+  ],
+  "implements": [
+    {
+      "name": "ourapps-ae/chip-ledger-class",
+      "version": "1.0.0",
+      "digest": "8d80db98857ee07f1275a4e0b75af4fe3c225af77273662c5e28136dbfbd7efb"
+    }
+  ],
+  "upstream": [],
+  "compatibility": {
+    "runtimes": {
+      "node": ">=26.5.0 <27.0.0"
+    },
+    "frameworks": {},
+    "dependencies": [],
+    "styles": {
+      "scope": "none",
+      "namespaces": [],
+      "conflicts": []
+    }
+  },
+  "maintenance": {
+    "owners": [
+      "Level N Ltd"
+    ],
+    "contact": "https://github.com/ourapps-ae/chip-ledger/issues",
+    "repository": "https://github.com/ourapps-ae/chip-ledger",
+    "updates": {
+      "source": "https://github.com/ourapps-ae/chip-ledger/releases",
+      "strategy": "manual"
+    }
+  },
+  "supportedPlatforms": [
+    "server"
+  ],
+  "licence": "Apache-2.0",
+  "licenceFile": "LICENCE",
+  "noticeFile": "NOTICE",
+  "templates": [],
+  "modules": {
+    "server": "server/index.ts"
   }
 }
